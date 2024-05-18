@@ -19,7 +19,8 @@
 			"adaptiveIcon": {
 				"foregroundImage": "",
 				"backgroundColor": "#ffffff"
-			}
+			},
+			"package": "com.zevon.aora"
 		},
 		"web": {
 			"bundler": "metro",
