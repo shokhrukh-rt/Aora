@@ -8,7 +8,7 @@ import { Link } from "expo-router";
 import { createUser } from "../../lib/appwrite";
 import { router } from "expo-router";
 
-const SignUP = () => {
+const SignUp = () => {
 	const [form, setForm] = useState({
 		username: "",
 		email: "",
@@ -18,7 +18,7 @@ const SignUP = () => {
 	const [submitting, setSubmitting] = useState(false);
 
 	const submit = async () => {
-		if (!form.username || !form.email || !form.password) {
+		if (form.username === "" || form.email === "" || form.password === "") {
 			Alert.alert("Error", "Please fill in all the fields");
 		}
 		setSubmitting(true);
@@ -28,6 +28,10 @@ const SignUP = () => {
 				form.password,
 				form.username
 			);
+			setUser(result);
+			setIsLogged(true);
+
+			Alert.alert("User signed up successfully");
 			router.replace("/home");
 		} catch (error) {
 			Alert.alert("Error", error.message);
@@ -94,4 +98,4 @@ const SignUP = () => {
 	);
 };
 
-export default SignUP;
+export default SignUp;
