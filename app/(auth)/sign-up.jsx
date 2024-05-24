@@ -28,11 +28,9 @@ const SignUp = () => {
 				form.password,
 				form.username
 			);
-			setUser(result);
-			setIsLogged(true);
 
-			Alert.alert("User signed up successfully");
-			router.replace("/home");
+			Alert.alert("User signed up successfully. Please sign in");
+			router.replace("/sign-in");
 		} catch (error) {
 			Alert.alert("Error", error.message);
 		} finally {
