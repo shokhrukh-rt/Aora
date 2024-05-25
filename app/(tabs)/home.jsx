@@ -9,41 +9,33 @@ import {
 } from "react-native";
 
 import { RefreshControl } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { images } from "../../constants";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
-
-const DATA = [
-	{
-		id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-		title: "First",
-	},
-	{
-		id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-		title: "Secon",
-	},
-	{
-		id: "58694a0f-3da1-471f-bd96-145571e29d72",
-		title: "Third",
-	},
-];
+import { getAllPosts } from "../../lib/appwrite";
+import useAppwrite from "../../lib/useAppwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Home = () => {
+	const { data: posts, refetch } = useAppwrite(getAllPosts);
 	const [refreshing, setRefreshing] = useState(false);
+	const { user } = useGlobalContext();
 
 	const onRefresh = async () => {
 		setRefreshing(true);
-		//recall posts
+		await refetch();
 		setRefreshing(false);
 	};
+	//console.log("this is the user \n", { user }, "\n");
+	console.log({ posts });
 
 	return (
 		<SafeAreaView className="bg-primary h-full">
 			<FlatList
-				data={DATA}
-				keyExtractor={(item) => item.id}
+				data={posts}
+				keyExtractor={(item) => item.$id}
 				renderItem={({ item }) => (
 					<Text className="text-3xl text-white">{item.title}</Text>
 				)}
@@ -72,7 +64,7 @@ const Home = () => {
 							<Text className="text-gray-100 text-lg font-pregular mb-3">
 								Trending videos
 							</Text>
-							<Trending posts={DATA} />
+							<Trending posts={[]} />
 						</View>
 					</View>
 				)}

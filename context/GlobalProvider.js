@@ -13,16 +13,20 @@ const GlobalProvider = ({ children }) => {
 	useEffect(() => {
 		getCurrentUser()
 			.then((res) => {
+				console.log("this is the response", { res });
 				if (res) {
 					setIsLoggedIn(true);
 					setUser(res);
 				} else {
+					console.log(
+						"this is getcurrentUser fn in global provider line 123"
+					);
 					setIsLoggedIn(false);
 					setUser(null);
 				}
 			})
 			.catch((error) => {
-				console.log(error);
+				console.log("global provider line 25", error);
 			})
 			.finally(() => {
 				setIsLoading(false);

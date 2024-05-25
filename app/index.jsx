@@ -9,9 +9,9 @@ import { useGlobalContext } from "../context/GlobalProvider";
 
 const App = () => {
 	const { isLoading, isLoggedIn } = useGlobalContext();
-	const alTrue = true;
+	//const alTrue = true;
 
-	if (alTrue) return <Redirect href="/home" />;
+	if (isLoggedIn) return <Redirect href="/home" />;
 	return (
 		<SafeAreaView className="bg-primary h-full">
 			<ScrollView contentContainerStyle={{ height: "100%" }}>
