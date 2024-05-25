@@ -16,12 +16,11 @@ import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
 import { getAllPosts } from "../../lib/appwrite";
 import useAppwrite from "../../lib/useAppwrite";
-import { useGlobalContext } from "../../context/GlobalProvider";
+import VideoCard from "../../components/VideoCard";
 
 const Home = () => {
 	const { data: posts, refetch } = useAppwrite(getAllPosts);
 	const [refreshing, setRefreshing] = useState(false);
-	const { user } = useGlobalContext();
 
 	const onRefresh = async () => {
 		setRefreshing(true);
@@ -29,16 +28,14 @@ const Home = () => {
 		setRefreshing(false);
 	};
 	//console.log("this is the user \n", { user }, "\n");
-	console.log({ posts });
+	//console.log({ posts });
 
 	return (
 		<SafeAreaView className="bg-primary h-full">
 			<FlatList
 				data={posts}
 				keyExtractor={(item) => item.$id}
-				renderItem={({ item }) => (
-					<Text className="text-3xl text-white">{item.title}</Text>
-				)}
+				renderItem={({ item }) => <VideoCard video={item} />}
 				ListHeaderComponent={() => (
 					<View className="my-10 px-4 space-y-2">
 						<View className="justify-between items-start flex-row mb-3">

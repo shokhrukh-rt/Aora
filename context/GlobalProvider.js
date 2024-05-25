@@ -13,7 +13,6 @@ const GlobalProvider = ({ children }) => {
 	useEffect(() => {
 		getCurrentUser()
 			.then((res) => {
-				console.log("this is the response", { res });
 				if (res) {
 					setIsLoggedIn(true);
 					setUser(res);
