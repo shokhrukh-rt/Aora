@@ -46,7 +46,7 @@ const TrendingItem = ({ activeItem, item }) => {
 				<TouchableOpacity
 					className="relative justify-center items-center"
 					activeOpacity={0.7}
-					onPress={() => setPlay(!play)}
+					onPress={() => setPlay(true)}
 				>
 					<ImageBackground
 						className="w-52 h-72 rounded-[35px] my-5
