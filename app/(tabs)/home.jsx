@@ -9,17 +9,18 @@ import {
 } from "react-native";
 
 import { RefreshControl } from "react-native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { images } from "../../constants";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
-import { getAllPosts } from "../../lib/appwrite";
+import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
 import useAppwrite from "../../lib/useAppwrite";
 import VideoCard from "../../components/VideoCard";
 
 const Home = () => {
 	const { data: posts, refetch } = useAppwrite(getAllPosts);
+	const { data: latestPosts } = useAppwrite(getLatestPosts);
 	const [refreshing, setRefreshing] = useState(false);
 
 	const onRefresh = async () => {
@@ -27,8 +28,6 @@ const Home = () => {
 		await refetch();
 		setRefreshing(false);
 	};
-	//console.log("this is the user \n", { user }, "\n");
-	//console.log({ posts });
 
 	return (
 		<SafeAreaView className="bg-primary h-full">
@@ -44,7 +43,7 @@ const Home = () => {
 									Welcome back
 								</Text>
 								<Text className="text-2xl font-psemibold text-white">
-									VANDAM
+									Yanchar Quyon
 								</Text>
 							</View>
 							<View className="mt-1.5">
@@ -61,7 +60,7 @@ const Home = () => {
 							<Text className="text-gray-100 text-lg font-pregular mb-3">
 								Trending videos
 							</Text>
-							<Trending posts={[]} />
+							<Trending posts={latestPosts} />
 						</View>
 					</View>
 				)}
