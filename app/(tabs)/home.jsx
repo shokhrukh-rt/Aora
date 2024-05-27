@@ -1,12 +1,4 @@
-import {
-	SafeAreaView,
-	View,
-	FlatList,
-	StyleSheet,
-	Text,
-	StatusBar,
-	Image,
-} from "react-native";
+import { SafeAreaView, View, FlatList, Text, Image } from "react-native";
 
 import { RefreshControl } from "react-native";
 import { useState } from "react";
