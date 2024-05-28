@@ -17,9 +17,6 @@ const GlobalProvider = ({ children }) => {
 					setIsLoggedIn(true);
 					setUser(res);
 				} else {
-					console.log(
-						"this is getcurrentUser fn in global provider line 123"
-					);
 					setIsLoggedIn(false);
 					setUser(null);
 				}
